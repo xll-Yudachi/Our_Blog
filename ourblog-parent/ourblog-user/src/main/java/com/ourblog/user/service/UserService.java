@@ -1,7 +1,7 @@
 package com.ourblog.user.service;
 
-
 import com.ourblog.common.bean.user.User;
+import com.ourblog.common.model.response.Result;
 
 import java.util.List;
 
@@ -13,8 +13,9 @@ import java.util.List;
  * @Version 1.0
  */
 public interface UserService {
-    public List<User> findAll();
-    public User saveUser(User user);
+     List<User> findAll();
+     User saveUser(User user);
+    Result UserLogin(User user);
 
     public User findUser();
 }

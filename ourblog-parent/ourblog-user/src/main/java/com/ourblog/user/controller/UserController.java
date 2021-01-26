@@ -4,11 +4,14 @@ import com.ourblog.common.bean.user.User;
 import com.ourblog.common.model.response.CommonCode;
 import com.ourblog.common.model.response.Result;
 import com.ourblog.common.model.response.userCode.UserCode;
-import com.ourblog.user.service.UserService;
+import com.ourblog.user.service.feign.Oauth2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.ourblog.user.service.UserService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName UserController
@@ -23,6 +26,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private Oauth2Service oauth2Service;
 
     @GetMapping("/findAll")
     public Result findAll(){
@@ -40,5 +45,9 @@ public class UserController {
     public Result findUser(){
         User user = userService.findUser();
         return new Result(CommonCode.SUCCESS, user);
+    }
+    @PostMapping("/login")
+    public Result UserLogin(@RequestBody User user){
+        return userService.UserLogin(user);
     }
 }
