@@ -25,6 +25,9 @@ public class Result implements Response{
         this.code = resultCode.code();
         this.message = resultCode.message();
     }
+    public Result(Object data) {
+        this(CommonCode.SUCCESS,data);
+    }
 
     public Result(ResultCode resultCode, Object data) {
         this.success = resultCode.success();
@@ -39,7 +42,4 @@ public class Result implements Response{
         this.message = message;
         this.data = data;
     }
-
-
-
 }

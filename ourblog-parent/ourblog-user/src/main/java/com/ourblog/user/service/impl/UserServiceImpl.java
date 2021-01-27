@@ -2,10 +2,10 @@ package com.ourblog.user.service.impl;
 
 import com.ourblog.common.bean.user.User;
 import com.ourblog.common.exception.CustomException;
+import com.ourblog.common.exception.ExceptionCast;
 import com.ourblog.common.model.response.Result;
 import com.ourblog.common.model.response.ResultCode;
 import com.ourblog.common.model.response.userCode.UserCode;
-import com.ourblog.user.service.feign.Oauth2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.ourblog.user.repository.UserRepository;
 import com.ourblog.user.service.UserService;
@@ -34,9 +34,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private Oauth2Service oauth2Service;
-
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
@@ -62,14 +59,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result UserLogin(User user) {
         User user1 = userRepository.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
-        //Optional.ofNullable(user1).orElseThrow(()->new CustomException(UserCode.LOGIN_FAIL));
-        HashMap<String , Object> param = new HashMap<>();
-        param.put("grant_type","password");
-        param.put("client_id","client-app");
-        param.put("client_secret","ZUIEWANGGUAN");
-        param.put("username",user.getUsername());
-        param.put("password",user.getPassword());
-        Result result = oauth2Service.postAccessToken(param);
-        return result;
+        //Optional.ofNullable(user1).orElseThrow(()-> new CustomException(UserCode.LOGIN_FAIL));
+        return user1==null ? new Result(UserCode.LOGIN_FAIL):new Result(user1.getId());
     }
 }

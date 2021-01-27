@@ -4,7 +4,6 @@ import com.ourblog.common.bean.user.User;
 import com.ourblog.common.model.response.CommonCode;
 import com.ourblog.common.model.response.Result;
 import com.ourblog.common.model.response.userCode.UserCode;
-import com.ourblog.user.service.feign.Oauth2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.ourblog.user.service.UserService;
@@ -26,8 +25,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private Oauth2Service oauth2Service;
 
     @GetMapping("/findAll")
     public Result findAll(){
