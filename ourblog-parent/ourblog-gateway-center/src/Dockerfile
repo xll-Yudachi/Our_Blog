@@ -1,6 +1,6 @@
 FROM java:8
 
-#将打成的jar包拷贝成名为 ourblog-gateway-center的jar包
+#将打成的jar包拷贝成名为 ourblog-com.ourblog.gateway-center的jar包
 COPY *.jar /ourblog-gateway-center.jar
 
 #默认就是8080
