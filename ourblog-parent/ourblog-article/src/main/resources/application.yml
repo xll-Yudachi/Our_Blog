@@ -1,0 +1,17 @@
+server:
+  port: 9003
+spring:
+  application:
+    name: ourblog-article
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://139.159.134.136:8848,http://139.159.134.136:8849，http://139.159.134.136:8850 #配置Nacos地址
+  datasource:
+    url: jdbc:mysql://8.129.173.191:3306/ourblog?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8

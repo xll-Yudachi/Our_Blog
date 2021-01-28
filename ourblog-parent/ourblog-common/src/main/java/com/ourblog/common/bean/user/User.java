@@ -1,6 +1,7 @@
 package com.ourblog.common.bean.user;
 
 import com.ourblog.common.bean.common.BaseEntity;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
