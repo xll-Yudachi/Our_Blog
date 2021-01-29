@@ -8,4 +8,5 @@ import java.util.*;
 @Repository
 public interface ArticleContentRepository extends JpaRepository<ArticleContent,Long> {
 
+    public ArticleContent findArticleContentByAid(Long aid);
 }

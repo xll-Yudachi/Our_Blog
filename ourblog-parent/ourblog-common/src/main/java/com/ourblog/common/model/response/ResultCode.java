@@ -7,6 +7,7 @@ package com.ourblog.common.model.response;
  * 20000 -- 用户中心返回码
  * 30000 -- 媒资返回码
  * 40000 -- 文件系统返回码
+ * 50000 -- 文章系统返回码
  * @Date 2021/1/21 10:22
  * @Version 1.0
  **/
