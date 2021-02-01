@@ -8,15 +8,18 @@ import com.ourblog.common.bean.article.Article;
 import com.ourblog.common.bean.article.ArticleContent;
 import com.ourblog.common.dto.article.ArticleData;
 import com.ourblog.common.dto.article.ArticleDetailDto;
+import com.ourblog.common.model.response.CommonCode;
+import com.ourblog.common.model.response.Result;
+import com.ourblog.common.model.response.ResultCode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +28,8 @@ public class ArticleServiceImpl implements ArticleService {
     ArticleContentRepository articleContentRepository;
     @Autowired
     ArticleRepository articleRepository;
+    @Autowired
+    RestTemplate restTemplate;
     @Override
     public List<Map<Article, ArticleContent>> findAll() {
         List<Article> all = articleRepository.findAll();
@@ -78,12 +83,33 @@ public class ArticleServiceImpl implements ArticleService {
         return save;
     }
 
+    @Override
+    public List<Article> getIndexArticle(Long uId,int page) {
+
+        return articleRepository.findArticlesByuIdAndIsDelete  (uId, 0, PageRequest.of(page-1,10));
+    }
+
+    @Override
+    @Transactional
+    public boolean newArticle(ArticleDetailDto articleDetailDto) {
+        Article article = new Article();
+        articleDetailCopyPropertiesToArticle(article,articleDetailDto);
+        article.setTags(Arrays.toString(JSON.parseArray(article.getTags()).toArray()));
+        Article save = articleRepository.save(article);
+        ArticleContent articleContent = new ArticleContent();
+        articleContent.setContent(articleDetailDto.getHtmlArticle()!=null?articleDetailDto.getHtmlArticle():articleDetailDto.getMdArticle());
+        articleContent.setAid(save.getId());
+        articleContentRepository.save(articleContent);
+        return true;
+    }
+
     /**
      * @Author yudachi
      * @Description 文章详情属性填充到文章中
      * @Date 2021/1/29 16:16
      **/
     private Article articleDetailCopyPropertiesToArticle(Article article, ArticleDetailDto articleDetail){
+        article.setuId(articleDetail.getuId());
         article.setImage(articleDetail.getArticleImg());
         article.setTitle(articleDetail.getArticleTitle());
         article.setTags(JSON.toJSONString(articleDetail.getArticleTags()));
@@ -91,6 +117,7 @@ public class ArticleServiceImpl implements ArticleService {
         article.setWatch(articleDetail.getArticleData().getWatch());
         return article;
     }
+
 
 
 }

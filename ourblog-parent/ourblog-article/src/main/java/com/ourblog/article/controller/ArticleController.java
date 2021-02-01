@@ -3,10 +3,12 @@ package com.ourblog.article.controller;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.alibaba.fastjson.JSON;
 import com.ourblog.article.service.ArticleService;
 import com.ourblog.common.bean.article.Article;
 import com.ourblog.common.bean.article.ArticleContent;
 import com.ourblog.common.dto.article.ArticleDetailDto;
+import com.ourblog.common.model.response.CommonCode;
 import com.ourblog.common.model.response.Result;
 import com.ourblog.common.model.response.articleCode.ArticleCode;
 import org.apache.commons.lang3.ArrayUtils;
@@ -53,5 +55,19 @@ public class ArticleController {
         }else{
             return new Result(ArticleCode.UPDATE_SUCCESS);
         }
+    }
+    @GetMapping("/index")
+    public Result getIndexArticle(@RequestParam("uId") Long uId,@RequestParam("page") int page){
+        if(uId==null||uId==0)
+            return new Result(CommonCode.FAIL);
+        return new Result(articleService.getIndexArticle(uId,page));
+    }
+
+    @PostMapping("/new")
+    public Result newArticle(@RequestBody  ArticleDetailDto articleDetailDto){
+        if(articleDetailDto==null)
+            return new Result(CommonCode.FAIL);
+        boolean b = articleService.newArticle(articleDetailDto);
+        return b? new Result(ArticleCode.UPDATE_SUCCESS):new Result(ArticleCode.UPDATE_FAIL);
     }
 }

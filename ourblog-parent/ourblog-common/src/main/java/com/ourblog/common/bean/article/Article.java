@@ -26,4 +26,12 @@ public class Article extends BaseEntity {
     private Integer watch = 0;
     @Column(name = "is_delete")
     private Integer isDelete = 0;
+
+
+    public void setuId(Long id){
+        this.uId=id;
+    }
+    public Long getuId(){
+        return this.uId;
+    }
 }

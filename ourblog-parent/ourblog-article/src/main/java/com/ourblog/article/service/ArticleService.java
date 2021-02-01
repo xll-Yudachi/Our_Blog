@@ -11,4 +11,7 @@ public interface ArticleService {
     List<Article> deleteArticleByIds(List<Long> ids);
 
     Article updateArticleById(ArticleDetailDto articleDetail);
+
+    List<Article> getIndexArticle(Long uId,int page);
+    boolean newArticle(ArticleDetailDto articleDetailDto);
 }
