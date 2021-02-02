@@ -32,6 +32,7 @@
         <fastjson.version>1.2.67</fastjson.version>
         <nimbus.jose.jwt>8.16</nimbus.jose.jwt>
         <hutool.version>5.1.0</hutool.version>
+        <elasticsearch.version>7.6.1</elasticsearch.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -97,6 +98,16 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
