@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  */
 @SpringBootApplication
 @EnableJpaAuditing
-@EntityScan(basePackages = "com.ourblog.common.bean.user")
+@EntityScan(basePackages = {"com.ourblog.common.bean.user", "com.ourblog.common.bean.invite"})
 public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class, args);
