@@ -7,6 +7,7 @@ import java.util.*;
 @Data
 public class ArticleDetailDto implements Serializable {
     private Long uId;
+    private String authorName;
     private Long articleId;
     private String articleImg;
     private String articleTitle;
