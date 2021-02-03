@@ -37,3 +37,10 @@ spring:
             - Path=/api/article/**
           filters:
             - StripPrefix=1
+
+        - id: tag-api-route
+          uri: lb://ourblog-article
+          predicates:
+            - Path=/api/tag/**
+          filters:
+            - StripPrefix=1
