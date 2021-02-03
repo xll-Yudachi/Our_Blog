@@ -11,14 +11,19 @@ import com.ourblog.common.dto.article.ArticleDetailDto;
 import com.ourblog.common.model.response.CommonCode;
 import com.ourblog.common.model.response.Result;
 import com.ourblog.common.model.response.articleCode.ArticleCode;
+import com.ourblog.common.utils.OSSUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.annotation.MultipartConfig;
+import java.io.IOException;
 import  java.util.*;
 
 @RestController
 @RequestMapping("/article")
+@CrossOrigin
 public class ArticleController {
     @Autowired
     ArticleService articleService;
@@ -69,5 +74,22 @@ public class ArticleController {
             return new Result(CommonCode.FAIL);
         boolean b = articleService.newArticle(articleDetailDto);
         return b? new Result(ArticleCode.UPDATE_SUCCESS):new Result(ArticleCode.UPDATE_FAIL);
+    }
+    @PostMapping("/upload")
+    @CrossOrigin
+    public Result upload(@RequestPart("file") MultipartFile[] files){
+        for (MultipartFile file:files){
+            try {
+                System.out.println(file.getName());
+                String originalFilename = file.getOriginalFilename();
+                System.out.println();
+                String ext=originalFilename.substring(originalFilename.lastIndexOf("."));
+                return OSSUtils.simpleUpload(file.getInputStream(),ext);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return new Result(CommonCode.FAIL);
+            }
+        }
+        return new Result(CommonCode.FAIL);
     }
 }
