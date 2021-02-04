@@ -11,7 +11,7 @@ public class ArticleDetailDto implements Serializable {
     private Long articleId;
     private String articleImg;
     private String articleTitle;
-    private List<String> articleTags;
+    private ArticleTags articleTags;
     private ArticleData articleData;
     private String mdArticle;
     private String htmlArticle;

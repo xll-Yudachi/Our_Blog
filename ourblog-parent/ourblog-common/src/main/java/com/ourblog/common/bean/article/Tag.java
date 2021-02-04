@@ -25,4 +25,5 @@ public class Tag extends BaseEntity {
     private String tag;
     @Column(name = "is_delete")
     private Integer isDelete = 0;
+    private Long pid;
 }
