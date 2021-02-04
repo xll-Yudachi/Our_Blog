@@ -16,31 +16,38 @@ spring:
             - Path=/api/user/**       # 当请求路径满足Path指定的规则时,才进行路由转发
           filters: # 过滤器,请求在传递过程中可以通过过滤器对其进行一定的修改
             - StripPrefix=1           # 转发之前去掉1层路径
-
+        # 邀请码
         - id: invite-api-route
           uri: lb://ourblog-user
           predicates:
             - Path=/api/invite/**
           filters:
             - StripPrefix=1
-
+        # 后台用户
         - id: admin-api-route
           uri: lb://ourblog-user
           predicates:
             - Path=/api/admin/**
           filters:
             - StripPrefix=1
-
+        # 文章
         - id : article-api-route
           uri: lb://ourblog-article
           predicates:
             - Path=/api/article/**
           filters:
             - StripPrefix=1
-
+        # 文章标签
         - id: tag-api-route
           uri: lb://ourblog-article
           predicates:
             - Path=/api/tag/**
+          filters:
+            - StripPrefix=1
+        # 外部工具
+        - id: et-api-route
+          uri: lb://ourblog-et
+          predicates:
+            - Path=/api/et/**
           filters:
             - StripPrefix=1
