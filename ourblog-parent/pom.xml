@@ -8,6 +8,7 @@
         <module>ourblog-gateway-center</module>
         <module>ourblog-user</module>
         <module>ourblog-article</module>
+        <module>ourblog-et</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
