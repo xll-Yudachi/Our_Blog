@@ -1,6 +1,7 @@
 package com.ourblog.article.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ourblog.article.repository.ArticleContentRepository;
 import com.ourblog.article.repository.ArticleRepository;
 import com.ourblog.article.service.ArticleService;
@@ -94,7 +95,8 @@ public class ArticleServiceImpl implements ArticleService {
     public boolean newArticle(ArticleDetailDto articleDetailDto) {
         Article article = new Article();
         articleDetailCopyPropertiesToArticle(article,articleDetailDto);
-        article.setTags(Arrays.toString(JSON.parseArray(article.getTags()).toArray()));
+        //article.setTags(Arrays.toString(JSON.parseArray(article.getTags()).toArray()));
+        article.setTags(JSON.toJSONString(articleDetailDto.getArticleTags()));
         Article save = articleRepository.save(article);
         ArticleContent articleContent = new ArticleContent();
         articleContent.setContent(articleDetailDto.getHtmlArticle()!=null?articleDetailDto.getHtmlArticle():articleDetailDto.getMdArticle());

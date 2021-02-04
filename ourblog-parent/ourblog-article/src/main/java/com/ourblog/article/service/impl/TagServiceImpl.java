@@ -3,6 +3,8 @@ package com.ourblog.article.service.impl;
 import com.ourblog.article.repository.TagRepository;
 import com.ourblog.article.service.TagService;
 import com.ourblog.common.bean.article.Tag;
+import com.ourblog.common.constant.CTConstant;
+import com.ourblog.common.dto.article.TagSaveDto;
 import com.ourblog.common.dto.article.TagSearchDto;
 import com.ourblog.common.model.response.PageResult;
 import org.apache.commons.lang3.StringUtils;
@@ -59,8 +61,19 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Tag add(Tag tag) {
-        return tagRepository.save(tag);
+    public Tag add(TagSaveDto tagSaveDto) {
+        String type = StringUtils.upperCase(tagSaveDto.getType());
+        Long pid = tagSaveDto.getTag().getPid();
+        if (pid == null && CTConstant.CATEGORY.equals(type)){
+            Tag tag = tagSaveDto.getTag();
+            tag.setPid(0L);
+            return tagRepository.save(tag);
+        }else if (pid != null && CTConstant.TAG.equals(type)){
+            Tag tag = tagSaveDto.getTag();
+            tag.setPid(pid);
+            return tagRepository.save(tag);
+        }
+        return null;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.ourblog.article.service;
 
 import com.ourblog.common.bean.article.Tag;
+import com.ourblog.common.dto.article.TagSaveDto;
 import com.ourblog.common.dto.article.TagSearchDto;
 import com.ourblog.common.model.response.PageResult;
 
@@ -18,7 +19,7 @@ public interface TagService {
 
     PageResult<Tag> findAllByPage(TagSearchDto tagSearchDto);
 
-    Tag add(Tag tag);
+    Tag add(TagSaveDto tagSaveDto);
 
     void delete(List<Long> ids);
 

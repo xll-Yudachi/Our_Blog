@@ -2,6 +2,7 @@ package com.ourblog.article.controller;
 
 import com.ourblog.article.service.TagService;
 import com.ourblog.common.bean.article.Tag;
+import com.ourblog.common.dto.article.TagSaveDto;
 import com.ourblog.common.dto.article.TagSearchDto;
 import com.ourblog.common.model.response.PageResult;
 import com.ourblog.common.model.response.Result;
@@ -46,8 +47,8 @@ public class TagController {
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Tag tag){
-        Tag saveTag = tagService.add(tag);
+    public Result add(@RequestBody TagSaveDto tagSaveDto){
+        Tag saveTag = tagService.add(tagSaveDto);
         if (saveTag == null){
             return new Result(ArticleCode.SAVE_TAG_FAIL);
         }else{
