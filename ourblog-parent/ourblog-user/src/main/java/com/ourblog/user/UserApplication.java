@@ -21,8 +21,9 @@ public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class, args);
     }
+
     @Bean
-    public ExceptionCatch exceptionCatch(){
-        return  new ExceptionCatch();
+    public ExceptionCatch exceptionCatch() {
+        return new ExceptionCatch();
     }
 }

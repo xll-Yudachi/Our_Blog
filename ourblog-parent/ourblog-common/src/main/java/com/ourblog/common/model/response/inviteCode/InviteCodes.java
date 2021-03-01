@@ -9,7 +9,7 @@ import com.ourblog.common.model.response.ResultCode;
  * @Date 2021/2/3 10:18
  * @Version 1.0
  */
-public enum InviteCodes implements ResultCode{
+public enum InviteCodes implements ResultCode {
     REGISTER_SUCCESS(true, 30000, "邀请码注册成功"),
     REGISTER_FAIL(false, 30001, "邀请码注册失败");
 

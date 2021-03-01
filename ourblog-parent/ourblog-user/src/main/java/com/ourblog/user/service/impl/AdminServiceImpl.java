@@ -21,9 +21,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Admin login(Admin admin) {
         Admin dbAdmin = adminRepository.findAdminByUsernameAndPassword(admin.getUsername(), admin.getPassword());
-        if (dbAdmin == null){
+        if (dbAdmin == null) {
             return null;
-        }else{
+        } else {
             return dbAdmin;
         }
     }

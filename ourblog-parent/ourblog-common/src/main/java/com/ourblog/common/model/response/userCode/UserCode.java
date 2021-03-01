@@ -7,8 +7,8 @@ import lombok.ToString;
 public enum UserCode implements ResultCode {
     REGISTER_SUCCESS(true, 23000, "注册成功"),
     REGISTER_FAIL(false, 23001, "注册失败"),
-    DUPLICATE_USERPHONE(false,23002,"手机号码重复"),
-    DUPLICATE_USERNAME(false,23003,"用户名重复"),
+    DUPLICATE_USERPHONE(false, 23002, "手机号码重复"),
+    DUPLICATE_USERNAME(false, 23003, "用户名重复"),
     USERPHONE_SUCCESS(true, 23004, "手机号码正确"),
     USERNAME_SUCCESS(true, 23005, "用户名正确"),
     LOGIN_FAIL(false, 23006, "用户名或密码错误"),

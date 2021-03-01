@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @ClassName InviteCodeController
- * @Description  邀请码注册控制层
+ * @Description 邀请码注册控制层
  * @Author Yudachi
  * @Date 2021/2/3 9:57
  * @Version 1.0
@@ -21,7 +21,7 @@ public class InviteCodeController {
     private InviteCodeService inviteCodeService;
 
     @PostMapping("/register")
-    public Result register(@RequestBody InviteDto inviteDto){
+    public Result register(@RequestBody InviteDto inviteDto) {
         return inviteCodeService.register(inviteDto);
     }
 }

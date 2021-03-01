@@ -28,11 +28,12 @@ import java.util.stream.Collectors;
 public class ETServiceImpl implements ETService {
     @Autowired
     private ETRepository etRepository;
+
     @Override
     public List<ExternalToolMap> findAll(String name) {
-        if (StringUtils.isEmpty(name)){
+        if (StringUtils.isEmpty(name)) {
             return etRepository.findAll();
-        }else{
+        } else {
             return etRepository.findExternalToolMapByNameLike(name);
         }
     }
@@ -40,17 +41,17 @@ public class ETServiceImpl implements ETService {
     @Override
     public PageResult<ExternalToolMap> findAllByPage(ETSearchDto etSearchDto) {
         PageResult<ExternalToolMap> pageResult = new PageResult<>();
-        if (StringUtils.isEmpty(etSearchDto.getQuery())){
+        if (StringUtils.isEmpty(etSearchDto.getQuery())) {
             Page<ExternalToolMap> ExternalToolMapPage = etRepository.findAll(PageRequest.of(etSearchDto.getPage(), etSearchDto.getSize()));
             pageResult.setRows(ExternalToolMapPage.getContent());
             pageResult.setTotal(ExternalToolMapPage.getTotalElements());
             return pageResult;
-        }else{
+        } else {
             ExternalToolMap externalToolMap = new ExternalToolMap();
             externalToolMap.setName(etSearchDto.getQuery());
             ExampleMatcher matcher = ExampleMatcher.matching()
-                    .withMatcher("name" ,ExampleMatcher.GenericPropertyMatchers.contains());
-            Example<ExternalToolMap> example = Example.of(externalToolMap ,matcher);
+                    .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains());
+            Example<ExternalToolMap> example = Example.of(externalToolMap, matcher);
             Page<ExternalToolMap> ExternalToolMapPage = etRepository.findAll(example, PageRequest.of(etSearchDto.getPage(), etSearchDto.getSize()));
             pageResult.setRows(ExternalToolMapPage.getContent());
             pageResult.setTotal(ExternalToolMapPage.getTotalElements());
@@ -77,9 +78,9 @@ public class ETServiceImpl implements ETService {
     @Override
     public ExternalToolMap update(ExternalToolMap externalToolMap) {
         ExternalToolMap dbExternalToolMap = etRepository.findById(externalToolMap.getId()).get();
-        if (dbExternalToolMap == null){
+        if (dbExternalToolMap == null) {
             return null;
-        }else{
+        } else {
             dbExternalToolMap.setName(externalToolMap.getName());
             dbExternalToolMap.setUrl(externalToolMap.getUrl());
             dbExternalToolMap.setUpdateTime(new Date());

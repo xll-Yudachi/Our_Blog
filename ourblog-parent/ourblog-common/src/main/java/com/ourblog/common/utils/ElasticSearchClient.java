@@ -11,7 +11,9 @@ import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 
 public class ElasticSearchClient {
-    public ElasticSearchClient() {}
+    public ElasticSearchClient() {
+    }
+
     public static RestHighLevelClient getClient() {
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY,

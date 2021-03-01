@@ -13,9 +13,12 @@ import java.util.List;
  * @Version 1.0
  */
 public interface UserService {
-     List<User> findAll();
-     User saveUser(User user);
+    List<User> findAll();
+
+    User saveUser(User user);
+
     Result UserLogin(User user);
 
-    public User findUser();
+     User findUser(Long uId);
+     boolean updateUser(User user);
 }

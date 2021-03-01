@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class ColorUtils {
     //随机生成颜色代码
-    public static String getColor(){
+    public static String getColor() {
         //红色
         String red;
         //绿色
@@ -21,13 +21,13 @@ public class ColorUtils {
         blue = Integer.toHexString(random.nextInt(256)).toUpperCase();
 
         //判断红色代码的位数
-        red = red.length()==1 ? "0" + red : red ;
+        red = red.length() == 1 ? "0" + red : red;
         //判断绿色代码的位数
-        green = green.length()==1 ? "0" + green : green ;
+        green = green.length() == 1 ? "0" + green : green;
         //判断蓝色代码的位数
-        blue = blue.length()==1 ? "0" + blue : blue ;
+        blue = blue.length() == 1 ? "0" + blue : blue;
         //生成十六进制颜色值
-        String color = "#"+red+green+blue;
+        String color = "#" + red + green + blue;
         return color;
     }
 }

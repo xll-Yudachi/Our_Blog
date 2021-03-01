@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "tb_user")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "u_id")
@@ -27,4 +27,8 @@ public class User extends BaseEntity{
     private String password;
     @Column(name = "u_email")
     private String email;
+    @Column(name = "u_github")
+    private String github;
+    @Column(name = "u_pic")
+    private String pic;
 }

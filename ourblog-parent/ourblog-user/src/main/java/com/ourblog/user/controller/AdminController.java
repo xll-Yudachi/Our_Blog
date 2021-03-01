@@ -5,10 +5,7 @@ import com.ourblog.common.model.response.Result;
 import com.ourblog.common.model.response.userCode.AdminCode;
 import com.ourblog.user.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @ClassName AdminController
@@ -19,17 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin
 public class AdminController {
 
     @Autowired
     private AdminService adminService;
 
     @PostMapping("/login")
-    public Result login(@RequestBody Admin admin){
+    public Result login(@RequestBody Admin admin) {
         Admin login = adminService.login(admin);
-        if (login == null){
+        if (login == null) {
             return new Result(AdminCode.LOGIN_FAIL);
-        }else{
+        } else {
             return new Result(AdminCode.LOGIN_SUCCESS, login.getId());
         }
     }

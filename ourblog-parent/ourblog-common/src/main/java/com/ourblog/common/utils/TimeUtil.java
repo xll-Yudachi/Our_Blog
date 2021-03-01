@@ -13,8 +13,7 @@ public class TimeUtil {
         int second = 0;
         if (time <= 0) {
             return "00:00";
-        }
-        else {
+        } else {
             minute = time / 60;
             if (minute < 60) {
                 second = time % 60;
@@ -42,16 +41,17 @@ public class TimeUtil {
         return retStr;
     }
 
-    public static String timestampToString(Long timestamp){
+    public static String timestampToString(Long timestamp) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(new Date(timestamp));
     }
-    public static List<String> recent30Date(){
+
+    public static List<String> recent30Date() {
         List<String> dateList = new ArrayList<>();
-        Date d=new Date();
-        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
-        for (int i = 30; i >=0 ; i--) {
-            dateList.add(df.format(new Date(d.getTime() - (long)i * 24 * 60 * 60 * 1000)));
+        Date d = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        for (int i = 30; i >= 0; i--) {
+            dateList.add(df.format(new Date(d.getTime() - (long) i * 24 * 60 * 60 * 1000)));
         }
         return dateList;
     }

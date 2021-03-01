@@ -1,4 +1,5 @@
 package com.ourblog.common.dto.article;
+
 import lombok.Data;
 
 import java.io.Serializable;
@@ -6,7 +7,8 @@ import java.util.*;
 
 @Data
 public class ArticleDetailDto implements Serializable {
-    private Long uId;
+    private Long authorId;
+    private String authorImg;
     private String authorName;
     private Long articleId;
     private String articleImg;
@@ -16,10 +18,5 @@ public class ArticleDetailDto implements Serializable {
     private String mdArticle;
     private String htmlArticle;
 
-    public void setuId(Long id){
-        this.uId=id;
-    }
-    public Long getuId(){
-        return this.uId;
-    }
+
 }

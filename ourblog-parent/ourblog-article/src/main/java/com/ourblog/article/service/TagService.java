@@ -24,4 +24,6 @@ public interface TagService {
     void delete(List<Long> ids);
 
     Tag update(Tag tag);
+
+
 }

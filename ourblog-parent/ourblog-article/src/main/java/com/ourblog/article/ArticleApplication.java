@@ -3,6 +3,7 @@ package com.ourblog.article;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  * @Version 1.0
  */
 @SpringBootApplication
+@EnableFeignClients
 @EnableJpaAuditing
 @EntityScan(basePackages = "com.ourblog.common.bean")
 public class ArticleApplication {

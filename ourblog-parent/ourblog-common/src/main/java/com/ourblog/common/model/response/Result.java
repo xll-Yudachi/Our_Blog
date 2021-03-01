@@ -7,7 +7,7 @@ import lombok.ToString;
 @Data
 @ToString
 @NoArgsConstructor
-public class Result implements Response{
+public class Result implements Response {
 
     //操作是否成功
     boolean success = SUCCESS;
@@ -25,8 +25,9 @@ public class Result implements Response{
         this.code = resultCode.code();
         this.message = resultCode.message();
     }
+
     public Result(Object data) {
-        this(CommonCode.SUCCESS,data);
+        this(CommonCode.SUCCESS, data);
     }
 
     public Result(ResultCode resultCode, Object data) {
@@ -36,7 +37,7 @@ public class Result implements Response{
         this.data = data;
     }
 
-    public Result(boolean success, int code, String message, Object data){
+    public Result(boolean success, int code, String message, Object data) {
         this.success = success;
         this.code = code;
         this.message = message;

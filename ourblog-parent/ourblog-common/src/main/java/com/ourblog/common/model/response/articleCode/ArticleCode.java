@@ -16,7 +16,8 @@ public enum ArticleCode implements ResultCode {
     DELETE_TAG_SUCCESS(true, 50008, "文章标签删除成功"),
     DELETE_TAG_FAIL(false, 50009, "文章标签删除失败"),
     UPDATE_TAG_SUCCESS(true, 50010, "文章标签更新成功"),
-    UPDATE_TAG_FAIL(false, 500011, "文章标签更新失败");
+    UPDATE_TAG_FAIL(false, 500011, "文章标签更新失败"),
+    SEARCH_FAIL(false, 500012, "文章查询失败");
 
     //操作是否成功
     boolean success;

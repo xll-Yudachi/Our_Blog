@@ -37,26 +37,26 @@ public class InviteCodeServiceImpl implements InviteCodeService {
     @Override
     public Result register(InviteDto inviteDto) {
         boolean isUser = true;
-        if (!InviteType.USER.getName().equals(inviteDto.getType())){
+        if (!InviteType.USER.getName().equals(inviteDto.getType())) {
             isUser = false;
         }
         InviteCode inviteCode = inviteCodeRepository.findInviteCodeByInviteCodeAndIsUse(inviteDto.getCode(), 1);
-        if (inviteCode != null){
+        if (inviteCode != null) {
             // 邀请码可用
-            if (isUser){
+            if (isUser) {
                 // 用户注册
                 User user = new User();
                 user.setUsername(inviteDto.getUsername());
                 user.setPassword(PasswordConstant.USERDEFAULTPASSWORD);
                 userRepository.save(user);
-            }else{
+            } else {
                 //后台用户注册
                 Admin admin = new Admin();
                 admin.setUsername(inviteDto.getUsername());
                 admin.setPassword(PasswordConstant.ADMINDEFAULTPASSWORD);
                 adminRepository.save(admin);
             }
-        }else{
+        } else {
             return new Result(InviteCodes.REGISTER_FAIL);
         }
         return new Result(InviteCodes.REGISTER_SUCCESS);

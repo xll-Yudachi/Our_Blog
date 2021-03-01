@@ -23,7 +23,7 @@ public class ETApplication {
     }
 
     @Bean
-    public ExceptionCatch exceptionCatch(){
-        return  new ExceptionCatch();
+    public ExceptionCatch exceptionCatch() {
+        return new ExceptionCatch();
     }
 }

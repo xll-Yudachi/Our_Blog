@@ -1,9 +1,11 @@
 package com.ourblog.article.service;
+
 import com.ourblog.common.bean.article.Article;
 import com.ourblog.common.bean.article.ArticleContent;
 import com.ourblog.common.dto.article.ArticleDetailDto;
+import com.ourblog.common.dto.article.ArticleIndexDto;
 
-import  java.util.*;
+import java.util.*;
 
 public interface ArticleService {
     List<Map<Article, ArticleContent>> findAll();
@@ -12,6 +14,12 @@ public interface ArticleService {
 
     Article updateArticleById(ArticleDetailDto articleDetail);
 
-    List<Article> getIndexArticle(Long uId,int page);
-    boolean newArticle(ArticleDetailDto articleDetailDto);
+    List<ArticleIndexDto> getIndexArticle( int page);
+    List<ArticleIndexDto> getUserArticle( Long uid,int page);
+
+    Article newArticle(ArticleDetailDto articleDetailDto);
+
+    List searchByKeyword(Map map);
+
+    ArticleDetailDto getArticle(Long id);
 }

@@ -28,10 +28,11 @@ public class Article extends BaseEntity {
     private Integer isDelete = 0;
 
 
-    public void setuId(Long id){
-        this.uId=id;
+    public void setuId(Long id) {
+        this.uId = id;
     }
-    public Long getuId(){
+
+    public Long getuId() {
         return this.uId;
     }
 }

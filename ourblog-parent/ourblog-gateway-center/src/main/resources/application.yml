@@ -10,7 +10,7 @@ spring:
         server-addr: http://139.159.134.136:8848,http://139.159.134.136:8849，http://139.159.134.136:8850 #配置Nacos地址
     gateway:
       routes: #配置路由路径
-        - id:  user-api-route          # 当前路由的标识, 要求唯一
+        - id: user-api-route          # 当前路由的标识, 要求唯一
           uri: lb://ourblog-user  # lb指的是从nacos中按照名称获取微服务,并遵循负载均衡策略
           predicates: # 断言(就是路由转发要满足的条件)
             - Path=/api/user/**       # 当请求路径满足Path指定的规则时,才进行路由转发
@@ -31,7 +31,7 @@ spring:
           filters:
             - StripPrefix=1
         # 文章
-        - id : article-api-route
+        - id: article-api-route
           uri: lb://ourblog-article
           predicates:
             - Path=/api/article/**

@@ -5,7 +5,7 @@ import com.ourblog.common.model.response.Result;
 
 /**
  * @ClassName InviteCodeService
- * @Description  邀请码注册服务
+ * @Description 邀请码注册服务
  * @Author Yudachi
  * @Date 2021/2/3 9:58
  * @Version 1.0

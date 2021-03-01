@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "article_content")
 @Builder
-public class ArticleContent  {
+public class ArticleContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

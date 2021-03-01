@@ -27,47 +27,47 @@ public class TagController {
     private TagService tagService;
 
     @GetMapping("/findAll")
-    public Result findAll(@RequestParam(value = "query", required = false) String tag){
+    public Result findAll(@RequestParam(value = "query", required = false) String tag) {
         List<Tag> dbTagList = tagService.findAll(tag);
-        if (dbTagList != null && dbTagList.size() > 0){
+        if (dbTagList != null && dbTagList.size() > 0) {
             return new Result(ArticleCode.SEARCH_TAG_SUCCESS, dbTagList);
-        }else{
+        } else {
             return new Result(ArticleCode.SEARCH_TAG_FAIL);
         }
     }
 
     @PostMapping("/findAllByPage")
-    public Result findAllByPage(@RequestBody TagSearchDto tagSearchDto){
+    public Result findAllByPage(@RequestBody TagSearchDto tagSearchDto) {
         PageResult<Tag> pageResult = tagService.findAllByPage(tagSearchDto);
-        if (pageResult != null && pageResult.getRows() != null && pageResult.getRows().size() > 0){
+        if (pageResult != null && pageResult.getRows() != null && pageResult.getRows().size() > 0) {
             return new Result(ArticleCode.SEARCH_TAG_SUCCESS, pageResult);
-        }else{
+        } else {
             return new Result(ArticleCode.SEARCH_TAG_FAIL);
         }
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody TagSaveDto tagSaveDto){
+    public Result add(@RequestBody TagSaveDto tagSaveDto) {
         Tag saveTag = tagService.add(tagSaveDto);
-        if (saveTag == null){
+        if (saveTag == null) {
             return new Result(ArticleCode.SAVE_TAG_FAIL);
-        }else{
+        } else {
             return new Result(ArticleCode.SAVE_TAG_SUCCESS, saveTag);
         }
     }
 
     @DeleteMapping("/delete")
-    public Result delete(@RequestBody List<Long> ids){
+    public Result delete(@RequestBody List<Long> ids) {
         tagService.delete(ids);
         return new Result(ArticleCode.DELETE_TAG_SUCCESS);
     }
 
     @PutMapping("/update")
-    public Result update(@RequestBody Tag tag){
+    public Result update(@RequestBody Tag tag) {
         Tag updateTag = tagService.update(tag);
-        if (updateTag == null){
+        if (updateTag == null) {
             return new Result(ArticleCode.UPDATE_TAG_FAIL);
-        }else{
+        } else {
             return new Result(ArticleCode.UPDATE_TAG_SUCCESS, updateTag);
         }
     }

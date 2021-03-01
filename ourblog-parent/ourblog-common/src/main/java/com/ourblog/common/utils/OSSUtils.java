@@ -26,7 +26,7 @@ public class OSSUtils {
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String objectName = formatter.format(date) + "/" + new IdWorker(0, 0, 0).nextId() + ".txt";
-        PutObjectRequest putObjectRequest = new PutObjectRequest("yudachi", objectName , new ByteArrayInputStream(content.getBytes()));
+        PutObjectRequest putObjectRequest = new PutObjectRequest("yudachi", objectName, new ByteArrayInputStream(content.getBytes()));
 
         ossClient.putObject(putObjectRequest);
         ossClient.shutdown();
@@ -49,10 +49,10 @@ public class OSSUtils {
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String objectName = formatter.format(date) + "/" + new IdWorker(0, 0, 0).nextId() + ext;
-        PutObjectRequest putObjectRequest = new PutObjectRequest("yudachi", objectName , new ByteArrayInputStream(content));
+        PutObjectRequest putObjectRequest = new PutObjectRequest("yudachi", objectName, new ByteArrayInputStream(content));
         ossClient.putObject(putObjectRequest);
         ossClient.shutdown();
-        return new Result( objectName);
+        return new Result(objectName);
     }
 
     /**
@@ -70,14 +70,14 @@ public class OSSUtils {
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String objectName = formatter.format(date) + "/" + new IdWorker(0, 0, 0).nextId() + ext;
-        PutObjectRequest putObjectRequest = new PutObjectRequest("yudachi", objectName , inputStream);
+        PutObjectRequest putObjectRequest = new PutObjectRequest("yudachi", objectName, inputStream);
         ossClient.putObject(putObjectRequest);
         ossClient.shutdown();
-        return new Result( objectName);
+        return new Result(objectName);
     }
-/*
+    /*
 
-    *//**
+     *//**
      * OSS简单上传 - 本地文件上传(生成格式 /年-月-日/randId.ext)
      *
      * @return: com.cx.jx.bean.ResultMsg
@@ -98,6 +98,7 @@ public class OSSUtils {
 
     /**
      * OSS断点续传
+     *
      * @param file 上传内容
      * @return: com.cx.jx.bean.ResultMsg
      **/
@@ -130,7 +131,7 @@ public class OSSUtils {
             ossClient.uploadFile(uploadFileRequest);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
-        }finally {
+        } finally {
             // 关闭OSSClient。
             ossClient.shutdown();
         }
@@ -140,10 +141,11 @@ public class OSSUtils {
 
     /**
      * 流式获取文件，获取的值是BufferedReader读出来的值
+     *
      * @param path 文件路径
      * @return: com.cx.jx.bean.ResultMsg
      **/
-    public static Result getStream(String path){
+    public static Result getStream(String path) {
         String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
         String accessKeyId = "LTAI4GKLPvgNBQxU3DAzMnKP";
         String accessKeySecret = "gTObKawEChj1tBR4y2pWl9UFbv2eqF";
@@ -167,7 +169,7 @@ public class OSSUtils {
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             ossClient.shutdown();
         }
         return new Result(line);
@@ -175,11 +177,12 @@ public class OSSUtils {
 
     /**
      * 下载OSS文件到本地文件。如果指定的本地文件存在会覆盖，不存在则新建。
+     *
      * @param path 文件路径
      * @param file 本地文件
      * @return: com.cx.jx.bean.ResultMsg
      **/
-    public static Result getLocalFile(String path, File file){
+    public static Result getLocalFile(String path, File file) {
         String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
         String accessKeyId = "LTAI4GKLPvgNBQxU3DAzMnKP";
         String accessKeySecret = "gTObKawEChj1tBR4y2pWl9UFbv2eqF";

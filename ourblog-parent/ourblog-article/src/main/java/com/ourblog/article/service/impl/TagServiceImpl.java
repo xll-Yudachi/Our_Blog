@@ -30,11 +30,12 @@ import java.util.stream.Collectors;
 public class TagServiceImpl implements TagService {
     @Autowired
     private TagRepository tagRepository;
+
     @Override
     public List<Tag> findAll(String tag) {
-        if (StringUtils.isEmpty(tag)){
+        if (StringUtils.isEmpty(tag)) {
             return tagRepository.findAll();
-        }else{
+        } else {
             return tagRepository.findTagsByTagLike(tag);
         }
     }
@@ -42,17 +43,17 @@ public class TagServiceImpl implements TagService {
     @Override
     public PageResult<Tag> findAllByPage(TagSearchDto tagSearchDto) {
         PageResult<Tag> pageResult = new PageResult<>();
-        if (StringUtils.isEmpty(tagSearchDto.getQuery())){
+        if (StringUtils.isEmpty(tagSearchDto.getQuery())) {
             Page<Tag> tagPage = tagRepository.findAll(PageRequest.of(tagSearchDto.getPage(), tagSearchDto.getSize()));
             pageResult.setRows(tagPage.getContent());
             pageResult.setTotal(tagPage.getTotalElements());
             return pageResult;
-        }else{
+        } else {
             Tag tag = new Tag();
             tag.setTag(tagSearchDto.getQuery());
             ExampleMatcher matcher = ExampleMatcher.matching()
-                    .withMatcher("tag" ,ExampleMatcher.GenericPropertyMatchers.contains());
-            Example<Tag> example = Example.of(tag ,matcher);
+                    .withMatcher("tag", ExampleMatcher.GenericPropertyMatchers.contains());
+            Example<Tag> example = Example.of(tag, matcher);
             Page<Tag> tagPage = tagRepository.findAll(example, PageRequest.of(tagSearchDto.getPage(), tagSearchDto.getSize()));
             pageResult.setRows(tagPage.getContent());
             pageResult.setTotal(tagPage.getTotalElements());
@@ -64,11 +65,11 @@ public class TagServiceImpl implements TagService {
     public Tag add(TagSaveDto tagSaveDto) {
         String type = StringUtils.upperCase(tagSaveDto.getType());
         Long pid = tagSaveDto.getTag().getPid();
-        if (pid == null && CTConstant.CATEGORY.equals(type)){
+        if (pid == null && CTConstant.CATEGORY.equals(type)) {
             Tag tag = tagSaveDto.getTag();
             tag.setPid(0L);
             return tagRepository.save(tag);
-        }else if (pid != null && CTConstant.TAG.equals(type)){
+        } else if (pid != null && CTConstant.TAG.equals(type)) {
             Tag tag = tagSaveDto.getTag();
             tag.setPid(pid);
             return tagRepository.save(tag);
@@ -90,9 +91,9 @@ public class TagServiceImpl implements TagService {
     @Override
     public Tag update(Tag tag) {
         Tag dbTag = tagRepository.findById(tag.getId()).get();
-        if (dbTag == null){
+        if (dbTag == null) {
             return null;
-        }else{
+        } else {
             dbTag.setTag(tag.getTag());
             dbTag.setUpdateTime(new Date());
         }

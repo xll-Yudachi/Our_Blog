@@ -13,7 +13,7 @@ import com.ourblog.common.model.response.userCode.UserCode;
 public class ExceptionCast {
 
 
-    public static void cast(ResultCode resultCode){
+    public static void cast(ResultCode resultCode) {
         throw new CustomException(resultCode);
     }
 }

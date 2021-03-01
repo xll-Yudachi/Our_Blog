@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @ClassName InviteCodeRepository
- * @Description  邀请码持久层
+ * @Description 邀请码持久层
  * @Author Yudachi
  * @Date 2021/2/3 10:12
  * @Version 1.0

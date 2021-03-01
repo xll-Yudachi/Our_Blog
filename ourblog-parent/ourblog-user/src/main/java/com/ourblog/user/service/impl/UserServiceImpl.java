@@ -17,6 +17,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Field;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
@@ -34,32 +35,55 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
     @Override
-    public User saveUser(User user){
+    public User saveUser(User user) {
         User save = userRepository.save(user);
         return save;
     }
 
     @Override
-    public User findUser() {
+    public User findUser(Long uId) {
         //从Header中获取用户信息
-        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = servletRequestAttributes.getRequest();
-        String userStr = request.getHeader("user");
-        User user = new User();
-        user.setUsername(userStr);
-        return user;
+        Optional<User> byId = userRepository.findById(Math.toIntExact(uId));
+        return byId.orElseGet(() -> byId.orElse(null));
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        Optional<User> byId = userRepository.findById(user.getId());
+        if(!byId.isPresent())
+            return false;
+        User user1 = byId.get();
+        Field[] fields = user.getClass().getDeclaredFields();
+        for(Field field:fields){
+            field.setAccessible(true);
+            try {
+                Object o = field.get(user);
+                if(o!=null)
+                    field.set(user1,o);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        User save = userRepository.save(user1);
+        return true;
     }
 
     @Override
     public Result UserLogin(User user) {
         User user1 = userRepository.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
         //Optional.ofNullable(user1).orElseThrow(()-> new CustomException(UserCode.LOGIN_FAIL));
-        return user1==null ? new Result(UserCode.LOGIN_FAIL):new Result(user1.getId());
+        HashMap<String,Object> map=new HashMap<>();
+        map.put("id",user1.getId());
+        map.put("username",user1.getUsername());
+        map.put("pic",user1.getPic());
+        return user1 == null ? new Result(UserCode.LOGIN_FAIL) : new Result(map);
     }
 }

@@ -27,47 +27,47 @@ public class ETController {
     private ETService etService;
 
     @GetMapping("/findAll")
-    public Result findAll(@RequestParam(value = "query", required = false) String name){
+    public Result findAll(@RequestParam(value = "query", required = false) String name) {
         List<ExternalToolMap> dbEtList = etService.findAll(name);
-        if (dbEtList != null && dbEtList.size() > 0){
+        if (dbEtList != null && dbEtList.size() > 0) {
             return new Result(ETCode.SEARCH_SUCCESS, dbEtList);
-        }else{
+        } else {
             return new Result(ETCode.SEARCH_FAIL);
         }
     }
 
     @PostMapping("/findAllByPage")
-    public Result findAllByPage(@RequestBody ETSearchDto eTSearchDto){
+    public Result findAllByPage(@RequestBody ETSearchDto eTSearchDto) {
         PageResult<ExternalToolMap> pageResult = etService.findAllByPage(eTSearchDto);
-        if (pageResult != null && pageResult.getRows() != null && pageResult.getRows().size() > 0){
+        if (pageResult != null && pageResult.getRows() != null && pageResult.getRows().size() > 0) {
             return new Result(ETCode.SEARCH_SUCCESS, pageResult);
-        }else{
+        } else {
             return new Result(ETCode.SEARCH_FAIL);
         }
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody ExternalToolMap externalToolMap){
+    public Result add(@RequestBody ExternalToolMap externalToolMap) {
         ExternalToolMap saveExternalToolMap = etService.add(externalToolMap);
-        if (saveExternalToolMap == null){
+        if (saveExternalToolMap == null) {
             return new Result(ETCode.SAVE_FAIL);
-        }else{
+        } else {
             return new Result(ETCode.SAVE_SUCCESS, saveExternalToolMap);
         }
     }
 
     @DeleteMapping("/delete")
-    public Result delete(@RequestBody List<Long> ids){
+    public Result delete(@RequestBody List<Long> ids) {
         etService.delete(ids);
         return new Result(ETCode.DELETE_SUCCESS);
     }
 
     @PutMapping("/update")
-    public Result update(@RequestBody ExternalToolMap externalToolMap){
+    public Result update(@RequestBody ExternalToolMap externalToolMap) {
         ExternalToolMap updateExternalToolMap = etService.update(externalToolMap);
-        if (updateExternalToolMap == null){
+        if (updateExternalToolMap == null) {
             return new Result(ETCode.UPDATE_FAIL);
-        }else{
+        } else {
             return new Result(ETCode.UPDATE_SUCCESS, updateExternalToolMap);
         }
     }
